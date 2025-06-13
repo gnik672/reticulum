@@ -34,7 +34,8 @@ config :ret, RetWeb.Endpoint,
   root: "."
 
 # Do not print debug messages in production
-config :logger, level: :info
+# config :logger, level: :info
+config :logger, :console, level: :debug, format: "[$level] $message\n"
 
 config :ret, Ret.Repo,
   username: "postgres",
@@ -126,8 +127,10 @@ config :ret, RetWeb.Plugs.HeaderAuthorization, header_name: "x-ret-admin-access-
 
 config :ret, Ret.Mailer,
   adapter: Bamboo.SMTPAdapter,
-  tls: :always,
-  ssl: false,
+  # tls: :always,
+  tls: false,
+  # ssl: false,
+  ssl: always,
   retries: 3
 
 config :ret, Ret.Guardian, issuer: "ret", ttl: {12, :weeks}, allowed_drift: 60 * 1000
